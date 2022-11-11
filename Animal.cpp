@@ -185,7 +185,8 @@ int main()
     dog1 = dog;
     dog1.printInfo();
 
-    //cat1(std::move(cat));
+    cat1 = std::move(cat);
+    cat1.printInfo();
 
     return 0;
 
