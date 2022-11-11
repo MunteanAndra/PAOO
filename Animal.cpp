@@ -13,7 +13,7 @@ class Animal
     public:
         void printInfo()
         {
-            cout<<"Animal's"<<endl;
+            cout<<endl<<"Animal's"<<endl;
             cout<<"Name is "<<name<<endl;
             cout<<"Age in human years is "<<age<<endl;
             cout<<"Breed is "<<breed<<endl;
@@ -34,6 +34,19 @@ class Animal
 class Dog : public Animal
 {
     public:
+        Dog()
+        {
+            name=" ";
+            breed=" ";
+            size=" ";
+            color=" ";  
+            age=0;
+            cout<<"Dog initialized.\n";
+        }
+        ~Dog()
+        {
+            cout<<"Dog destroyed(destructered).\n";
+        }
         void printInfo()
         {
             cout<<"Dog's"<<endl;
@@ -53,6 +66,19 @@ class Dog : public Animal
 class Cat : public Animal
 {
     public:
+        Cat()
+        {
+            name=" ";
+            breed=" ";
+            size=" ";
+            color=" ";  
+            age=0;
+            cout<<"Cat initialized.\n";
+        }
+        ~Cat()
+        {
+            cout<<"Cat destroyed(destructered).\n";
+        }
         void printInfo()
         {
             cout<<"Cat's"<<endl;
@@ -134,7 +160,7 @@ int main()
     cout<<endl<<endl;
     cat.printInfo();
     cout<<"Cat's age "<<cat.calculateAge();
-    cout<<endl;
+    cout<<endl<<endl;
     //animal.getAnimal();
 
     return 0;
