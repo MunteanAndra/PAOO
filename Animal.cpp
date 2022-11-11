@@ -33,6 +33,7 @@ class Animal
 
 class Dog : public Animal
 {
+    string *copyDog;
     public:
         Dog()
         {
@@ -47,6 +48,13 @@ class Dog : public Animal
         {
             cout<<"Dog destroyed(destructered).\n";
         }
+        // copy constructor
+        Dog(const Dog &obj)
+        {
+            copyDog = new string;
+            *copyDog = *obj.copyDog; //copy value
+            cout<<"Copy constructor allocating new Dog. \n\n";
+        }
         void printInfo()
         {
             cout<<"Dog's"<<endl;
@@ -54,7 +62,7 @@ class Dog : public Animal
             cout<<"Age in human years is "<<age<<endl;
             cout<<"Breed is "<<breed<<endl;
             cout<<"Size is "<<size<<endl;
-            cout<<"Color is "<<color<<endl;
+            cout<<"Color is "<<color<<endl<<endl;
         }
         int calculateAge()
         {
@@ -86,7 +94,7 @@ class Cat : public Animal
             cout<<"Age in human years is "<<age<<endl;
             cout<<"Breed is "<<breed<<endl;
             cout<<"Size is "<<size<<endl;
-            cout<<"Color is "<<color<<endl;
+            cout<<"Color is "<<color<<endl<<endl;
         }
         int calculateAge()
         {
@@ -131,7 +139,7 @@ string Animal::getAnimal()
 int main()
 {
     Animal animal;
-    Dog dog;
+    Dog dog, dog1;
     Cat cat;
     //animal.putAnimal("Caine","bichon","negru","big",2);
     animal.name = "domestic animal";
@@ -153,16 +161,19 @@ int main()
     cat.color= "grey";
 
     animal.printInfo();
-    cout<<"Animal's age "<<animal.calculateAge();
+    cout<<"Animal's "<<animal.name<<" age is "<<animal.calculateAge();
     cout<<endl<<endl;
     dog.printInfo();
-    cout<<"Dog's age "<<dog.calculateAge();
+    cout<<"Dog's "<<dog.name<<" age is "<<dog.calculateAge();
     cout<<endl<<endl;
     cat.printInfo();
-    cout<<"Cat's age "<<cat.calculateAge();
+    cout<<"Cat's "<<cat.name<<" age is "<<cat.calculateAge();
     cout<<endl<<endl;
+
     //animal.getAnimal();
 
+    dog1 = dog;
+    dog1.printInfo();
     return 0;
 
 }
