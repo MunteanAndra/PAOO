@@ -73,6 +73,9 @@ class Dog : public Animal
 
 class Cat : public Animal
 {
+    private:
+    string *moveCat;
+
     public:
         Cat()
         {
@@ -102,6 +105,13 @@ class Cat : public Animal
                 return (age - 6) * 4 + 40;
             else
                 return (age * 19) / 3 + 1; 
+        }
+        // Move constructor
+        Cat ( Cat & obj)
+        {
+            cout <<"Move constructor for Cat. \n";
+            this->moveCat = obj.moveCat;
+            obj.moveCat = NULL;
         }
 
 };
@@ -140,7 +150,7 @@ int main()
 {
     Animal animal;
     Dog dog, dog1;
-    Cat cat;
+    Cat cat, cat1;
     //animal.putAnimal("Caine","bichon","negru","big",2);
     animal.name = "domestic animal";
     animal.breed = "mixt";
@@ -174,6 +184,9 @@ int main()
 
     dog1 = dog;
     dog1.printInfo();
+
+    //cat1(std::move(cat));
+
     return 0;
 
 }
