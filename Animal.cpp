@@ -78,6 +78,7 @@ class Cat : public Animal
 {
     private:
     string *moveCat;
+    Animal *a;
 
     public:
         Cat()
@@ -116,7 +117,18 @@ class Cat : public Animal
             this->moveCat = obj.moveCat;
             obj.moveCat = NULL;
         }
-
+        Cat& operator=(const Cat &rhsCat){
+            cout<< "\nAssignment operator called for cat"<<endl;
+            if(this == &rhsCat){
+                cout<<"same object \n\n";
+                return *this;
+            } else{
+                //delete a;
+                //a = new Animal(*rhsCat.a);
+                cout<<"different object \n";
+                return *this;
+            } 
+        }
 };
 
 class Uncopyable {
@@ -199,6 +211,11 @@ int main()
 
     dog5 = dog4 = dog3; // dog4.operator=(dog3) dog5.operator=(dog4)
     Dog dog6 = dog4;
+
+    Cat cat3;
+    cat3 = cat;
+    cat = cat; 
+
     return 0;
 
 }
