@@ -37,10 +37,10 @@ class Dog : public Animal
     public:
         Dog()
         {
-            name=" ";
-            breed=" ";
-            size=" ";
-            color=" ";  
+            name="";
+            breed="";
+            size="";
+            color="";  
             age=0;
             cout<<"Dog initialized.\n";
         }
@@ -51,8 +51,8 @@ class Dog : public Animal
         // copy constructor
         Dog(const Dog &obj)
         {
-            copyDog = new string;
-            *copyDog = *obj.copyDog; //copy value
+            //copyDog = new string;
+            //*copyDog = *obj.copyDog; //copy value
             cout<<"Copy constructor allocating new Dog. \n\n";
         }
         void printInfo()
@@ -68,7 +68,10 @@ class Dog : public Animal
         {
             return age * 7;
         }
-
+        Dog& operator=(const Dog& rhs){
+            cout<< "Assignment operator called"<<endl<<endl;
+            return *this;
+        }
 };
 
 class Cat : public Animal
@@ -79,10 +82,10 @@ class Cat : public Animal
     public:
         Cat()
         {
-            name=" ";
-            breed=" ";
-            size=" ";
-            color=" ";  
+            name="";
+            breed="";
+            size="";
+            color="";  
             age=0;
             cout<<"Cat initialized.\n";
         }
@@ -116,13 +119,22 @@ class Cat : public Animal
 
 };
 
+class Uncopyable {
+    protected: // allow construction
+        Uncopyable() {} // and destruction of
+        ~Uncopyable() {} // derived objects...
+    private:
+        Uncopyable(const Uncopyable&); // ...but prevent copying
+        Uncopyable& operator=(const Uncopyable&);
+};
+
 //constructor
 Animal::Animal()
 {
-    name=" ";
-    breed=" ";
-    size=" ";
-    color=" ";  
+    name="";
+    breed="";
+    size="";
+    color="";  
     age=0;
     cout<<"animal initialized.\n";
 }
@@ -132,26 +144,12 @@ Animal::~Animal()
     cout<<"animal destroyed(destructered).\n";
 }
 
-void Animal::putAnimal(string n, string b, string c, string s, int a)
-{
-    name=n;
-    breed=b;
-    color=c;
-    size=s;
-    age=a;
-}
-
-string Animal::getAnimal()
-{
-    return name + " " + breed + " " + color + " " + size + ".\n" ;
-}
-
 int main()
 {
     Animal animal;
-    Dog dog, dog1;
+    Dog dog, dog1, dog2, dog3, dog4, dog5;
     Cat cat, cat1;
-    //animal.putAnimal("Caine","bichon","negru","big",2);
+    
     animal.name = "domestic animal";
     animal.breed = "mixt";
     animal.size = "big";
@@ -180,14 +178,27 @@ int main()
     cout<<"Cat's "<<cat.name<<" age is "<<cat.calculateAge();
     cout<<endl<<endl;
 
-    //animal.getAnimal();
-
     dog1 = dog;
-    dog1.printInfo();
 
     cat1 = std::move(cat);
     cat1.printInfo();
 
+    //dog2.name = dog.name;
+    //dog2.age = dog.age;
+    //dog2.size = dog.size;
+    //dog2.breed = dog.breed;
+    //dog2.color = dog.color;
+    dog2 = dog;
+    dog2.printInfo();
+
+    dog.name = "Tano";
+    cout<<"Dog's name changed"<<endl;
+    dog.printInfo();
+    cout<<"Dog2's name after Dog's name changed"<<endl;
+    dog2.printInfo();
+
+    dog5 = dog4 = dog3; // dog4.operator=(dog3) dog5.operator=(dog4)
+    Dog dog6 = dog4;
     return 0;
 
 }
