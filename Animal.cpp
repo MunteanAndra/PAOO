@@ -9,6 +9,7 @@ class Animal
         string size;
         string color;
         int age;
+        string newField;
 
     public:
         void printInfo()
@@ -19,6 +20,7 @@ class Animal
             cout<<"Breed is "<<breed<<endl;
             cout<<"Size is "<<size<<endl;
             cout<<"Color is "<<color<<endl;
+            cout<<"New field is "<<newField<<endl;
     
         }
         int calculateAge()
@@ -29,6 +31,18 @@ class Animal
     ~Animal();
     void putAnimal(string name, string breed, string color, string size, int age);
     string getAnimal();
+
+    Animal& operator = (const Animal& rhs)
+    {
+        name = rhs.name;
+        breed = rhs.breed;
+        size = rhs.size;
+        color = rhs.color;
+        age = rhs.age;
+        newField = rhs.newField;
+        cout<<"copy all assignment called"<<endl<<endl;
+        return *this;
+    }
 };
 
 class Dog : public Animal
@@ -131,6 +145,38 @@ class Cat : public Animal
         }
 };
 
+class Mouse : public Animal
+{
+    public:
+        Mouse()
+        {
+            name="";
+            breed="";
+            size="";
+            color="";  
+            age=0;
+            cout<<"Mouse initialized.\n\n";
+        }
+        ~Mouse()
+        {
+            cout<<"Mouse destroyed(destructered).\n";
+        }
+        Mouse(const Mouse& rhMouse) : Animal(rhMouse){
+            cout<<"copy all assignment called"<<endl;
+        }
+        void printInfo()
+        {
+            cout<<"Mouse's"<<endl;
+            cout<<"Name is "<<name<<endl;
+            cout<<"Age in human years is "<<age<<endl;
+            cout<<"Breed is "<<breed<<endl;
+            cout<<"Size is "<<size<<endl;
+            cout<<"Color is "<<color<<endl;
+            cout<<"New field is"<<newField<<endl<<endl;
+        }
+
+};
+
 class Uncopyable {
     protected: // allow construction
         Uncopyable() {} // and destruction of
@@ -195,6 +241,8 @@ int main()
     cat1 = std::move(cat);
     cat1.printInfo();
 
+    cout<<"ITEM 10 \n\n";
+
     //dog2.name = dog.name;
     //dog2.age = dog.age;
     //dog2.size = dog.size;
@@ -212,9 +260,28 @@ int main()
     dog5 = dog4 = dog3; // dog4.operator=(dog3) dog5.operator=(dog4)
     Dog dog6 = dog4;
 
+    cout<<"ITEM 11 \n\n";
+
     Cat cat3;
     cat3 = cat;
     cat = cat; 
+
+    cout<<"ITEM 12 \n\n";
+
+    Mouse mouse1, mouse2;
+
+    mouse1.name = "Jerry";
+    mouse1.age = 10;
+    mouse1.color = "grey";
+    mouse1.size = "small";
+
+    mouse1.printInfo();
+    mouse2.printInfo();
+
+    mouse2 = mouse1;
+
+    mouse1.printInfo();
+    mouse2.printInfo();
 
     return 0;
 
