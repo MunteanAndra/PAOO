@@ -67,7 +67,7 @@ class Dog : public Animal
         {
             //copyDog = new string;
             //*copyDog = *obj.copyDog; //copy value
-            cout<<"Copy constructor allocating new Dog. \n\n";
+            cout<<"Copy operator for new Dog. \n\n";
         }
         void printInfo()
         {
@@ -241,8 +241,6 @@ int main()
     cat1 = std::move(cat);
     cat1.printInfo();
 
-    cout<<"ITEM 10 \n\n";
-
     //dog2.name = dog.name;
     //dog2.age = dog.age;
     //dog2.size = dog.size;
@@ -257,14 +255,26 @@ int main()
     cout<<"Dog2's name after Dog's name changed"<<endl;
     dog2.printInfo();
 
+    cout<<"ITEM 10 \n\n";
+
+    dog3.name = "Rex";
+    dog3.breed = "labrador";
+    dog3.size = "big";
+    dog3.age = 2;
+    dog3.color = "white";
+
     dog5 = dog4 = dog3; // dog4.operator=(dog3) dog5.operator=(dog4)
     Dog dog6 = dog4;
+    
+    dog5.printInfo();
+    dog3.printInfo();
 
     cout<<"ITEM 11 \n\n";
 
     Cat cat3;
     cat3 = cat;
     cat = cat; 
+    cat3 = cat3 = cat3;
 
     cout<<"ITEM 12 \n\n";
 
