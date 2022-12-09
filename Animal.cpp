@@ -1,9 +1,12 @@
 #include <iostream>
 #include <memory>
+#include <mutex>
 using namespace std;
 
 class Animal
 {
+    mutex m;
+
     public:
         string name;
         string breed;
@@ -43,6 +46,12 @@ class Animal
             cout<<ptr2<<endl;
             cout<<ptr1<<endl;
             cout<<"resource management called"<<endl;
+        }
+        void resourceBehavior()
+        {
+            m.lock();
+            m.unlock();
+            cout<<"resource behavior management called"<<endl;
         }
     Animal();
     ~Animal();
@@ -180,7 +189,7 @@ class Mouse : public Animal
         {
             cout<<"Mouse destroyed(destructered).\n";
         }
-        Mouse(const Mouse& rhMouse) : Animal(rhMouse){
+        Mouse(const Mouse& rhMouse){
             cout<<"copy all assignment called"<<endl;
         }
         void printInfo()
@@ -319,6 +328,12 @@ int main()
     a.resources();
     cout<<endl;
     a1.resourcesWithCopy();
+    cout<<endl;
+
+    cout<<"ITEM 14 \n\n";
+
+    Animal a2;
+    a2.resourceBehavior();
     cout<<endl;
 
     return 0;
