@@ -1,4 +1,5 @@
 #include <iostream>
+#include <memory>
 using namespace std;
 
 class Animal
@@ -27,6 +28,12 @@ class Animal
         {
             return age * 1;
         }
+        void resources()
+        {
+            unique_ptr<Animal> plnv(new Animal());
+            cout<<plnv<<endl;
+            cout<<"resource management called"<<endl;
+        }
     Animal();
     ~Animal();
     void putAnimal(string name, string breed, string color, string size, int age);
@@ -43,6 +50,8 @@ class Animal
         cout<<"copy all assignment called"<<endl<<endl;
         return *this;
     }
+    //Animal* FactoryMethod();
+
 };
 
 class Dog : public Animal
@@ -292,6 +301,13 @@ int main()
 
     mouse1.printInfo();
     mouse2.printInfo();
+
+    cout<<"ITEM 13 \n\n";
+
+    Animal a;
+    cout<<endl;
+    a.resources();
+    cout<<endl;
 
     return 0;
 
