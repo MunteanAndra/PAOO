@@ -34,6 +34,16 @@ class Animal
             cout<<plnv<<endl;
             cout<<"resource management called"<<endl;
         }
+        void resourcesWithCopy()
+        {
+            shared_ptr<Animal> ptr1(new Animal());
+            cout<<ptr1<<endl;
+            shared_ptr<Animal> ptr2(ptr1);
+            ptr1 = ptr2;
+            cout<<ptr2<<endl;
+            cout<<ptr1<<endl;
+            cout<<"resource management called"<<endl;
+        }
     Animal();
     ~Animal();
     void putAnimal(string name, string breed, string color, string size, int age);
@@ -304,9 +314,11 @@ int main()
 
     cout<<"ITEM 13 \n\n";
 
-    Animal a;
+    Animal a, a1;
     cout<<endl;
     a.resources();
+    cout<<endl;
+    a1.resourcesWithCopy();
     cout<<endl;
 
     return 0;
